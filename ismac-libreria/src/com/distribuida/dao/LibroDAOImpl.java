@@ -49,9 +49,7 @@ public class LibroDAOImpl implements LibroDAO {
     @Transactional
     public void del(int id) {
         Session session = sessionFactory.getCurrentSession();
-        Libro libro = session.get(Libro.class, id);
-        if (libro != null) {
-            session.delete(libro);
+            session.delete(findOne(id));
         }
     }
-}
+

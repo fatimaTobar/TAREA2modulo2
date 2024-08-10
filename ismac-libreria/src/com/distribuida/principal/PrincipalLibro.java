@@ -17,7 +17,7 @@ public class PrincipalLibro {
 		// Ejemplo de operaciones CRUD
 		
 		// Agregar un nuevo libro
-		Libro libro = new Libro(0, "ISBN-123456", "Título del Libro", 0, "Autor del Libro", null, null, null, null, null, 0, null, null, 29.99);
+		Libro libro = new Libro();
 		libroDAO.add(libro);
 		
 		// Obtener y mostrar un libro por su ID

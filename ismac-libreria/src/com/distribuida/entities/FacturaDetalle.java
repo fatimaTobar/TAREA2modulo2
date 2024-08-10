@@ -1,81 +1,88 @@
 package com.distribuida.entities;
 
+import javax.persistence.*;
+import org.springframework.stereotype.Component;
+
+@Component
+@Entity
+@Table(name = "factura_detalle")
 public class FacturaDetalle {
 
-	
-	private int idFacturaDetalle;
-	private int cantidad;
-	private double subtotal;
-	
-	private int factura; //private int idFactura;
-	private Libro libro;     //private int idLibro;
-	
-	
-	public FacturaDetalle(int i, String string, int j, double d) {
-		// TODO Auto-generated constructor stub
-	}
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_factura_detalle")
+    private int idFacturaDetalle;
 
-	public FacturaDetalle(int i, Object string, int j, int d) {
-		// TODO Auto-generated constructor stub
-	}
+    @Column(name = "cantidad")
+    private int cantidad;
 
-	public int getIdFacturaDetalle() {
-		return idFacturaDetalle;
-	}
+    @Column(name = "subtotal")
+    private double subtotal;
 
-	public void setIdFacturaDetalle(int idFacturaDetalle) {
-		this.idFacturaDetalle = idFacturaDetalle;
-	}
+    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @JoinColumn(name = "id_libro")
+    private Libro libro;
 
-	public int getCantidad() {
-		return cantidad;
-	}
+    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @JoinColumn(name = "id_factura")
+    private Factura factura;
 
-	public void setCantidad(int cantidad) {
-		this.cantidad = cantidad;
-	}
+    // Constructor vacío requerido por JPA
+    public FacturaDetalle() {}
 
-	public double getSubtotal() {
-		return subtotal;
-	}
+    // Constructor con parámetros
+    public FacturaDetalle(int idFacturaDetalle, int cantidad, double subtotal, Libro libro, Factura factura) {
+        this.idFacturaDetalle = idFacturaDetalle;
+        this.cantidad = cantidad;
+        this.subtotal = subtotal;
+        this.libro = libro;
+        this.factura = factura;
+    }
 
-	public void setSubtotal(double subtotal) {
-		this.subtotal = subtotal;
-	}
+    // Getters y Setters
+    public int getIdFacturaDetalle() {
+        return idFacturaDetalle;
+    }
 
-	public int getFactura() {
-		return factura;
-	}
+    public void setIdFacturaDetalle(int idFacturaDetalle) {
+        this.idFacturaDetalle = idFacturaDetalle;
+    }
 
-	public void setFactura(int i) {
-		this.factura = i;
-	}
+    public int getCantidad() {
+        return cantidad;
+    }
 
-	public Libro getLibro() {
-		return libro;
-	}
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
+    }
 
-	public void setLibro(Libro libro) {
-		this.libro = libro;
-	}
+    public double getSubtotal() {
+        return subtotal;
+    }
 
-	@Override
-	public String toString() {
-		return "FacturaDetalle [idFacturaDetalle=" + idFacturaDetalle + ", cantidad=" + cantidad + ", subtotal="
-				+ subtotal + ", factura=" + factura + ", libro=" + libro + "]";
-	}
+    public void setSubtotal(double subtotal) {
+        this.subtotal = subtotal;
+    }
 
-	public void setProducto(String string) {
-		// TODO Auto-generated method stub
-		
-	}
+    public Libro getLibro() {
+        return libro;
+    }
 
-	public void setPrecioUnitario(double d) {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	
-	
-	
+    public void setLibro(Libro libro) {
+        this.libro = libro;
+    }
+
+    public Factura getFactura() {
+        return factura;
+    }
+
+    public void setFactura(Factura factura) {
+        this.factura = factura;
+    }
+
+    @Override
+    public String toString() {
+        return "FacturaDetalle [idFacturaDetalle=" + idFacturaDetalle + ", cantidad=" + cantidad + ", subtotal=" 
+            + subtotal + ", libro=" + libro + ", factura=" + factura + "]";
+    }
 }

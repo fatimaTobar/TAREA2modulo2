@@ -23,7 +23,7 @@ public class FacturaDAOImpl implements FacturaDAO {
 	public List<Factura> findAll() {
 		// TODO Auto-generated method stub
 		Session session  =  sessionFactory.getCurrentSession();
-		return session.createNamedQuery("from Factura").getResultList();
+		return session.createNamedQuery("from Factura", Factura.class).getResultList();
 	}
 
 	@Override
